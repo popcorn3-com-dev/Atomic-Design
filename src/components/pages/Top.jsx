@@ -1,14 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from "styled-components";
 import { Header } from "../atoms/layout/Header";
 import { Footer } from "../atoms/layout/Footer";
 import { useNavigate } from 'react-router';
 import { SecondaryButton } from "../atoms/button/SecondaryButton";
+import { UserContext } from '../../providers/UserProvider';
 
 export const Top = () => {
     const navigate = useNavigate();
-    const onClickAdmin = () => navigate('/users', { state: { isAdmin: true } });
-    const onClickGeneral = () => navigate('/users', { state: { isAdmin: false } });
+    const { setUserInfo } = useContext(UserContext);
+
+    const onClickAdmin = () => {
+        setUserInfo({ isAdmin: true });
+        navigate('/users');
+    }
+    const onClickGeneral = () => {
+        setUserInfo({ isAdmin: false });
+        navigate('/users');
+    }
     return (
         <>
             <Header />
