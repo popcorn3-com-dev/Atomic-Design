@@ -1,6 +1,8 @@
+import React from 'react';
 import styled from "styled-components";
 import { Header } from "../atoms/layout/Header";
 import { Footer } from "../atoms/layout/Footer";
+import { useLocation } from 'react-router';
 import { UserCard } from "../organisms/user/UserCard";
 import { SearchInput } from "../molecules/SearchInput";
 
@@ -19,6 +21,8 @@ const users = [...Array(10).keys()].map((val) => {
 })
 
 export const Users = () => {
+    const { state } = useLocation();
+    const isAdmin = state ? state.isAdmin : false;
     return (
         <>
             <Header />
@@ -29,7 +33,7 @@ export const Users = () => {
                 </SSeach>
                 <SUserArea>
                     {users.map((user) => (
-                        <UserCard key={user.id} user={user} />
+                        <UserCard key={user.id} user={user} isAdmin={isAdmin} />
                     ))}
                 </SUserArea>
             </SContainer>
